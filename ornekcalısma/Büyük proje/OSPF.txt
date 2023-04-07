@@ -1,0 +1,34 @@
+---MULTILAYER SW1---
+SW1(config)#interface fastEthernet 0/6
+SW1(config-if)#no switchport 
+SW1(config-if)#ip address 192.168.1.1 255.255.255.0
+SW1(config-if)#duplex auto 
+SW1(config-if)#speed auto 
+SW1(config)#ip routing 
+SW1(config)#router ospf 3
+SW1(config-router)#network 192.168.1.0 255.255.255.0 area 1
+SW1(config-router)#ex
+
+
+---ROUTER1---
+R1(config)#router ospf 1
+R1(config-router)#network 1.1.1.0 255.255.255.252 area 1
+R1(config-router)#network 192.168.1.0 255.255.255.0 area 1
+R1(config-router)#ex
+
+---ROUTER2---
+R2(config)#router ospf 2
+R2(config-router)#network 1.1.1.0 255.255.255.252 area 1
+R2(config-router)#network 192.168.13.0 255.255.255.0 area 1
+R2(config-router)#ex
+
+---MULTILAYER SW2---
+SW2(config)#interface fastEthernet 0/6
+SW2(config-if)#no switchport 
+SW2(config-if)#ip address 192.168.13.1 255.255.255.0
+SW2(config-if)#duplex auto 
+SW2(config-if)#speed auto
+SW2(config)#ip routing
+SW2(config)#router ospf 4
+SW2(config-router)#network 192.168.13.0 255.255.255.0 area 1
+SW2(config-router)#ex
